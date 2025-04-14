@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+        margin: 5px;
+        text-align: center;
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Hello Javascript!</h2>
+    <div class="box">first div</div>
+    <div class="box">second div</div>
+    <div class="box">third div</div>
+  </body>
+
+  <script>
+    let h2 = document.querySelector("h2");
+    let String1 = (document.createTextNode = " from apna college students");
+    h2.append(String1);
+
+    let divs = document.querySelectorAll(".box");
+    let idx = 1;
+    divs.forEach((items) => {
+      items.innerText = `new unique value ${idx}`;
+      idx++;
+    });
+  </script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lets Prac</title>
+    <style>
+      .dark {
+        background-color: black;
+        color: white;
+      }
+
+      .light {
+        background-color: white;
+        color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="mode">Change Mode</button>
+    <p>Welcome to my website!</p>
+  </body>
+
+  <script>
+    let mode = document.querySelector("#mode");
+    let currMode = "light";
+
+    mode.addEventListener("click", () => {
+      if (currMode === "light") {
+        currMode = "dark";
+        document.querySelector("body").classList.add("dark");
+        document.querySelector("body").classList.remove("light");
+      } else {
+        currMode = "light";
+        document.querySelector("body").classList.add("light");
+        document.querySelector("body").classList.remove("dark");
+      }
+
+      console.log(currMode);
+    });
+  </script>
+</html>

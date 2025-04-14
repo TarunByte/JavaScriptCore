@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Request</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .card img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+        margin: 15px 0;
+      }
+
+      .card p {
+        font-size: 16px;
+        color: #777;
+      }
+
+      .card .followers {
+        margin-top: 15px;
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <img id="avatar" src="" alt="Avatar" />
+      <h2 id="name">Name</h2>
+      <p id="bio">Bio goes here</p>
+      <p class="followers">Followers: <span id="followers">0</span></p>
+    </div>
+  </body>
+
+  <script>
+    const requestUrl = "https://api.github.com/users/hiteshchoudhary";
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", requestUrl);
+
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState);
+
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const data = JSON.parse(this.responseText);
+
+        document.getElementById("avatar").src = data.avatar_url;
+
+        document.getElementById("name").textContent = data.name;
+
+        document.getElementById("bio").textContent = data.bio;
+
+        document.getElementById("followers").textContent = data.followers;
+
+        // console.log(typeof data);
+
+        //     console.log(data.followers);
+      }
+    };
+
+    xhr.send();
+  </script>
+</html>

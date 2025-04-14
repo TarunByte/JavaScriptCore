@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        height: 100px;
+        width: 100px;
+        background-color: dodgerblue;
+        color: white;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="btn1">btn1</button>
+    <div>this is a box</div>
+  </body>
+
+  <script>
+    let btn1 = document.querySelector("#btn1");
+    // btn1.onclick = (e) => {
+    //   console.log(e);
+    //   console.log(e.type);
+    //   console.log(e.target);
+    //   console.log(e.clientX, e.clientY);
+    // };
+
+    btn1.addEventListener("click", (evt) => {
+      console.log("button was clicked - handler1");
+    });
+
+    btn1.addEventListener("click", () => {
+      console.log("button was clicked - handler2");
+    });
+
+    //function3
+    const handler3 = function () {
+      console.log("button was clicked - handler3");
+    };
+
+    btn1.addEventListener("click", handler3);
+
+    btn1.addEventListener("click", () => {
+      console.log("button was clicked - handler4");
+    });
+
+    btn1.removeEventListener("click", handler3);
+
+    let box = document.querySelector("div");
+  </script>
+</html>
