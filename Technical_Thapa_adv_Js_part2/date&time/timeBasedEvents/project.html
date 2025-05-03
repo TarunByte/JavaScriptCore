@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <p id="countDown">00:00:00
+        <p id="ms-second">00</p>
+      </p>
+      <div class="buttons">
+        <button class="start_btn">Start</button>
+        <button class="reset_btn">Reset</button>
+        <button class="stop_btn">Stop</button>
+        <button class="time_btn">getTime</button>
+        <button class="clear_btn">clearTime</button>
+      </div>
+      <div class="resetValue">
+        <p id="time-output"></p>
+      </div>
+    </section>
+    <script>
+      const countDownElement = document.getElementById("countDown");
+      const timeOutput = document.querySelector("#time-output");
+      const miliSecond = document.getElementById("ms-second");
+      let startCount = 0;
+      let miliCount = 0;
+      let intervalId;
+      let miliIntervalId;
+
+      const formatTime = (totalSeconds) => {
+        const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+        const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+          2,
+          "0"
+        );
+        const secs = String(totalSeconds % 60).padStart(2, "0");
+      
+        return `${hrs}:${mins}:${secs}`;
+      };
+
+      const miliSeconFormat = (totalSeconds) => {
+        const ms = String(totalSeconds % 10).padStart(2, "0");
+        return ms;
+      }
+
+      
+      // Function to start the timer  
+      const startTimer = () => {
+        if (!intervalId) {
+          startMiliSecond();
+          countDownElement.innerText = formatTime(startCount++);
+          intervalId = setInterval(() => {
+            countDownElement.innerText = formatTime(startCount++);
+          }, 1000);
+        }
+      };
+
+      //Function to start miliSecond 
+      const startMiliSecond = () => {
+        if(!miliIntervalId){
+          miliIntervalId = setInterval(() => {
+            miliSecond.innerText = miliSeconFormat(miliCount++)
+          },100)
+        }
+      }
+
+      // Function to stop the timer and show stop time
+      const stopTimer = () => {
+        showStopValue();
+        clearInterval(intervalId);
+        clearInterval(miliIntervalId)
+        intervalId = null;
+        miliIntervalId = null;
+      };
+
+      // Function to reset the timer
+      const resetTimer = () => {
+        startCount = 0;
+        countDownElement.innerText = "00:00:00";
+        miliSecond.innerText = "00"
+        clearInterval(intervalId);
+        clearInterval(miliIntervalId)
+        intervalId = null;
+        miliIntervalId = null;
+        cleartTimeValue();
+      };
+
+      // Function to show stop value
+      const showStopValue = () => {
+        if (startCount === 0) {
+          timeOutput.innerText = `The stop time is ${formatTime(startCount)}`;
+        } else {
+          timeOutput.innerText = `The stop time is ${formatTime(
+            startCount - 1
+          )}`;
+        }
+      };
+
+      // Function to show stop time
+      const cleartTimeValue = () => {
+        timeOutput.textContent = "";
+      };
+
+      // Event listeners
+      document
+        .querySelector(".start_btn")
+        .addEventListener("click", startTimer);
+
+      document
+        .querySelector(".reset_btn")
+        .addEventListener("click", resetTimer);
+
+      document.querySelector(".stop_btn").addEventListener("click", stopTimer);
+
+      document
+        .querySelector(".time_btn")
+        .addEventListener("click", showStopValue);
+
+      document
+        .querySelector(".clear_btn")
+        .addEventListener("click", cleartTimeValue);
+    </script>
+  </body>
+</html>
